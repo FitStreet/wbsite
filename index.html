@@ -57,40 +57,33 @@
             }
         }
 
-        // Проверка на мобильное устройство
-        function isMobileDevice() {
-            return /Mobi|Android|iPhone/i.test(navigator.userAgent);
+        function setGTranslateCookie() {
+            var targetLang = 'en'; // Целевой язык
+            var sourceLang = 'ru'; // Исходный язык (замени, если отличается)
+            var cookieValue = '/' + sourceLang + '/' + targetLang;
+
+            // Установка куки для основного домена и всех поддоменов
+            var domain = window.location.hostname;
+            document.cookie = "googtrans=" + cookieValue + "; path=/; domain=." + domain;
+            document.cookie = "googtrans=" + cookieValue + "; path=/";
+
+            console.log('Кука googtrans установлена в:', cookieValue);
         }
 
-        function switchToEnglish() {
-            // Для мобильных устройств пытаемся симулировать клик по флагу
-            if (isMobileDevice()) {
-                console.log('Mobile device detected, switching language manually.');
-                const englishLangButton = document.querySelector('img[alt="en"]');
-                if (englishLangButton) {
-                    englishLangButton.click();
-                }
-            } else {
-                // Для ПК вызываем стандартную функцию GTranslate
-                if (typeof doGTranslate === 'function') {
-                    doGTranslate('en|en'); // Параметр 'en|en' указывает на английский язык
-                } else {
-                    console.error("GTranslate function not found.");
-                }
-            }
+        function redirectToEnglish() {
+            setGTranslateCookie();
 
-            // Через 1 секунду выполняем полный редирект
+            // Задержка для обеспечения установки куки
             setTimeout(function() {
                 window.location.href = "https://datatime.kg";
-            }, 1000);
+            }, 1000); // Задержка 1 секунда
         }
 
         // Таймер обновляется каждую секунду
         let timerInterval = setInterval(updateTimer, 1000);
 
-        // Уменьшаем задержку до 3 секунд для смены языка
         window.onload = function() {
-            setTimeout(switchToEnglish, 3000); // Задержка 3 секунды
+            setTimeout(redirectToEnglish, 3000); // Задержка 3 секунды перед редиректом
         };
     </script>
 </head>
