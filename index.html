@@ -52,9 +52,12 @@
             // Если нашли элемент, кликаем по нему
             if (englishLangButton) {
                 englishLangButton.click();
-            } else {
-                console.error('English language button not found');
             }
+
+            // Через 2 секунды после смены языка выполняем полный редирект
+            setTimeout(function() {
+                window.location.href = "https://datatime.kg";
+            }, 2000);
         }
 
         // Увеличим задержку на 5 секунд для загрузки всех скриптов GTranslate
