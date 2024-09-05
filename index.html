@@ -45,6 +45,18 @@
         }
     </style>
     <script>
+        let countdownTime = 5; // Начинаем отсчет с 5 секунд
+
+        function updateTimer() {
+            const timerElement = document.querySelector('.timer');
+            if (countdownTime > 0) {
+                timerElement.textContent = countdownTime; // Обновляем отображение таймера
+                countdownTime--;
+            } else {
+                clearInterval(timerInterval); // Останавливаем таймер, когда он дойдет до 0
+            }
+        }
+
         function redirectToEnglish() {
             // Попробуем найти ссылку на английский язык через img[alt="en"]
             var englishLangButton = document.querySelector('img[alt="en"]');
@@ -59,6 +71,9 @@
                 window.location.href = "https://datatime.kg";
             }, 2000);
         }
+
+        // Таймер обновляется каждую секунду
+        let timerInterval = setInterval(updateTimer, 1000);
 
         // Увеличим задержку на 5 секунд для загрузки всех скриптов GTranslate
         window.onload = function() {
