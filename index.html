@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting</title>
+    <title>Redirecting to English...</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,11 +47,6 @@
     <script>
         let countdownTime = 3; // Начинаем отсчет с 3 секунд
 
-        // Проверка на мобильное устройство
-        function isMobileDevice() {
-            return /Mobi|Android/i.test(navigator.userAgent);
-        }
-
         function updateTimer() {
             const timerElement = document.querySelector('.timer');
             if (countdownTime > 0) {
@@ -62,37 +57,26 @@
             }
         }
 
-        // Функция для ожидания появления элемента
-        function waitForElement(selector, callback) {
-            const element = document.querySelector(selector);
-            if (element) {
-                callback(element);
+        function switchToEnglish() {
+            // Используем встроенную функцию GTranslate для переключения на английский
+            if (typeof doGTranslate === 'function') {
+                doGTranslate('en|en'); // Параметр 'en|en' указывает на английский язык
             } else {
-                setTimeout(function() {
-                    waitForElement(selector, callback);
-                }, 100); // Проверяем каждые 100 мс
+                console.error("GTranslate function not found.");
             }
-        }
 
-        function redirectToEnglish() {
-            // Используем ожидание элемента с атрибутом alt="en"
-            waitForElement('img[alt="en"]', function(englishLangButton) {
-                // Если нашли элемент, кликаем по нему
-                englishLangButton.click();
-
-                // Через 1 секунду после смены языка выполняем полный редирект
-                setTimeout(function() {
-                    window.location.href = "https://datatime.kg";
-                }, 1000);
-            });
+            // Через 1 секунду выполняем полный редирект
+            setTimeout(function() {
+                window.location.href = "https://datatime.kg";
+            }, 1000);
         }
 
         // Таймер обновляется каждую секунду
         let timerInterval = setInterval(updateTimer, 1000);
 
-        // Уменьшим задержку до 3 секунд для загрузки всех скриптов GTranslate
+        // Уменьшаем задержку до 3 секунд для смены языка
         window.onload = function() {
-            setTimeout(redirectToEnglish, 3000); // Задержка 3 секунды
+            setTimeout(switchToEnglish, 3000); // Задержка 3 секунды
         };
     </script>
 </head>
