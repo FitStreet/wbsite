@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting to English...</title>
+    <title>Redirecting to www.datatime.kg...</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,27 +46,28 @@
     </style>
     <script>
         function redirectToEnglish() {
-            // Ищем элемент с атрибутом alt="en" для английского флага
+            // Попробуем найти ссылку на английский язык через img[alt="en"]
             var englishLangButton = document.querySelector('img[alt="en"]');
+            
+            // Если нашли элемент, кликаем по нему
             if (englishLangButton) {
-                // Имитируем клик по элементу для смены языка
                 englishLangButton.click();
             } else {
                 console.error('English language button not found');
             }
         }
 
-        // Выполним функцию после полной загрузки страницы
+        // Увеличим задержку на 5 секунд для загрузки всех скриптов GTranslate
         window.onload = function() {
-            setTimeout(redirectToEnglish, 3000); // Задержка на 3 секунды для переключения языка
+            setTimeout(redirectToEnglish, 5000); // Задержка 5 секунд
         };
     </script>
 </head>
 <body>
     <div class="container">
-        <h1>Redirecting to English Version</h1>
-        <p>You will be redirected in <span class="timer">3</span> seconds.</p>
-        <p>If the redirect does not happen automatically, please click <a href="#">here</a>.</p>
+        <h1>Redirecting to Datatime.kg</h1>
+        <p>You will be redirected in <span class="timer">5</span> seconds.</p>
+        <p>If the redirect does not happen automatically, please click <a href="https://datatime.kg">here</a>.</p>
     </div>
 </body>
 </html>
