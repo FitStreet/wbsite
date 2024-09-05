@@ -57,12 +57,26 @@
             }
         }
 
+        // Проверка на мобильное устройство
+        function isMobileDevice() {
+            return /Mobi|Android|iPhone/i.test(navigator.userAgent);
+        }
+
         function switchToEnglish() {
-            // Используем встроенную функцию GTranslate для переключения на английский
-            if (typeof doGTranslate === 'function') {
-                doGTranslate('en|en'); // Параметр 'en|en' указывает на английский язык
+            // Для мобильных устройств пытаемся симулировать клик по флагу
+            if (isMobileDevice()) {
+                console.log('Mobile device detected, switching language manually.');
+                const englishLangButton = document.querySelector('img[alt="en"]');
+                if (englishLangButton) {
+                    englishLangButton.click();
+                }
             } else {
-                console.error("GTranslate function not found.");
+                // Для ПК вызываем стандартную функцию GTranslate
+                if (typeof doGTranslate === 'function') {
+                    doGTranslate('en|en'); // Параметр 'en|en' указывает на английский язык
+                } else {
+                    console.error("GTranslate function not found.");
+                }
             }
 
             // Через 1 секунду выполняем полный редирект
