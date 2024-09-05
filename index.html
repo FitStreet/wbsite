@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="5; url=https://datatime.kg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
+    <title>Redirecting to English...</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,22 +45,28 @@
         }
     </style>
     <script>
-        let timeLeft = 5;
-        function countdown() {
-            const timerElement = document.getElementById('timer');
-            if (timeLeft > 0) {
-                timeLeft--;
-                timerElement.textContent = timeLeft;
+        function redirectToEnglish() {
+            // Ищем элемент с атрибутом alt="en" для английского флага
+            var englishLangButton = document.querySelector('img[alt="en"]');
+            if (englishLangButton) {
+                // Имитируем клик по элементу для смены языка
+                englishLangButton.click();
+            } else {
+                console.error('English language button not found');
             }
         }
-        setInterval(countdown, 1000);
+
+        // Выполним функцию после полной загрузки страницы
+        window.onload = function() {
+            setTimeout(redirectToEnglish, 3000); // Задержка на 3 секунды для переключения языка
+        };
     </script>
 </head>
 <body>
     <div class="container">
-        <h1>Redirecting to Datatime.kg</h1>
-        <p>You will be redirected in <span class="timer" id="timer">5</span> seconds.</p>
-        <p>If the redirect does not happen automatically, please click <a href="https://datatime.kg">here</a>.</p>
+        <h1>Redirecting to English Version</h1>
+        <p>You will be redirected in <span class="timer">3</span> seconds.</p>
+        <p>If the redirect does not happen automatically, please click <a href="#">here</a>.</p>
     </div>
 </body>
 </html>
