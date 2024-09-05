@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting to Datatime</title>
+    <title>Redirecting to English...</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,7 +45,7 @@
         }
     </style>
     <script>
-        let countdownTime = 5; // Начинаем отсчет с 5 секунд
+        let countdownTime = 3; // Начинаем отсчет с 3 секунд
 
         function updateTimer() {
             const timerElement = document.querySelector('.timer');
@@ -66,25 +66,25 @@
                 englishLangButton.click();
             }
 
-            // Через 2 секунды после смены языка выполняем полный редирект
+            // Через 1 секунду после смены языка выполняем полный редирект
             setTimeout(function() {
                 window.location.href = "https://datatime.kg";
-            }, 2000);
+            }, 1000);
         }
 
         // Таймер обновляется каждую секунду
         let timerInterval = setInterval(updateTimer, 1000);
 
-        // Увеличим задержку на 5 секунд для загрузки всех скриптов GTranslate
+        // Уменьшим задержку до 3 секунд для загрузки всех скриптов GTranslate
         window.onload = function() {
-            setTimeout(redirectToEnglish, 5000); // Задержка 5 секунд
+            setTimeout(redirectToEnglish, 3000); // Задержка 3 секунды
         };
     </script>
 </head>
 <body>
     <div class="container">
-        <h1>Redirecting to Datatime.kg</h1>
-        <p>You will be redirected in <span class="timer">5</span> seconds.</p>
+        <h1>Redirecting to English Version</h1>
+        <p>You will be redirected in <span class="timer">3</span> seconds.</p>
         <p>If the redirect does not happen automatically, please click <a href="https://datatime.kg">here</a>.</p>
     </div>
 </body>
