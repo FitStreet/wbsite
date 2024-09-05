@@ -47,6 +47,11 @@
     <script>
         let countdownTime = 3; // Начинаем отсчет с 3 секунд
 
+        // Проверка на мобильное устройство
+        function isMobileDevice() {
+            return /Mobi|Android/i.test(navigator.userAgent);
+        }
+
         function updateTimer() {
             const timerElement = document.querySelector('.timer');
             if (countdownTime > 0) {
@@ -57,19 +62,29 @@
             }
         }
 
-        function redirectToEnglish() {
-            // Попробуем найти ссылку на английский язык через img[alt="en"]
-            var englishLangButton = document.querySelector('img[alt="en"]');
-            
-            // Если нашли элемент, кликаем по нему
-            if (englishLangButton) {
-                englishLangButton.click();
+        // Функция для ожидания появления элемента
+        function waitForElement(selector, callback) {
+            const element = document.querySelector(selector);
+            if (element) {
+                callback(element);
+            } else {
+                setTimeout(function() {
+                    waitForElement(selector, callback);
+                }, 100); // Проверяем каждые 100 мс
             }
+        }
 
-            // Через 1 секунду после смены языка выполняем полный редирект
-            setTimeout(function() {
-                window.location.href = "https://datatime.kg";
-            }, 1000);
+        function redirectToEnglish() {
+            // Используем ожидание элемента с атрибутом alt="en"
+            waitForElement('img[alt="en"]', function(englishLangButton) {
+                // Если нашли элемент, кликаем по нему
+                englishLangButton.click();
+
+                // Через 1 секунду после смены языка выполняем полный редирект
+                setTimeout(function() {
+                    window.location.href = "https://datatime.kg";
+                }, 1000);
+            });
         }
 
         // Таймер обновляется каждую секунду
@@ -83,7 +98,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Redirecting to Datatime.kg</h1>
+        <h1>Redirecting to English Version</h1>
         <p>You will be redirected in <span class="timer">3</span> seconds.</p>
         <p>If the redirect does not happen automatically, please click <a href="https://datatime.kg">here</a>.</p>
     </div>
