@@ -45,34 +45,31 @@
         }
     </style>
     <script>
-        let countdownTime = 3; // Таймер отсчитывает с 3 секунд
+        let countdownTime = 3; // Таймер начинается с 3 секунд
 
+        // Обновляем таймер каждую секунду
         function updateTimer() {
             const timerElement = document.querySelector('.timer');
             if (countdownTime > 0) {
-                timerElement.textContent = countdownTime; // Обновление таймера на странице
+                timerElement.textContent = countdownTime;
                 countdownTime--;
             } else {
-                clearInterval(timerInterval); // Остановка таймера
+                clearInterval(timerInterval);
             }
         }
 
+        // Функция для установки языка в localStorage и редиректа
         function redirectToEnglish() {
-            // Проверка наличия функции GTranslate
-            if (typeof doGTranslate === 'function') {
-                // Переключение на английский с использованием функции doGTranslate
-                doGTranslate('ru|en');
-                console.log('Перевод страницы через doGTranslate выполнен');
-            } else {
-                console.error('Функция doGTranslate не найдена');
-            }
+            localStorage.setItem('googtrans', '/ru/en'); // Устанавливаем язык в localStorage
+            window.location.href = "https://datatime.kg"; // Перенаправляем на сайт
         }
 
-        // Обновление таймера каждую секунду
+        // Запускаем таймер
         let timerInterval = setInterval(updateTimer, 1000);
 
+        // Выполняем редирект через 3 секунды
         window.onload = function() {
-            setTimeout(redirectToEnglish, 3000); // Перевод через 3 секунды
+            setTimeout(redirectToEnglish, 3000);
         };
     </script>
 </head>
