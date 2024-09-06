@@ -65,16 +65,20 @@
 
         // Функция для переключения языка с задержкой
         function switchLanguage() {
-            setTimeout(function() {
-                // Ищем переключатель языка с классом 'gt-lang-code'
+            let attempts = 0;
+            const interval = setInterval(function() {
                 const langSwitcher = document.querySelector("span.gt-lang-code");
                 if (langSwitcher && langSwitcher.textContent.trim() === 'ru') {
                     // Эмулируем клик для переключения на английский язык
                     langSwitcher.click();
-                } else {
-                    console.error('Не удалось найти переключатель языка или язык уже переключен');
+                    clearInterval(interval); // Останавливаем проверку после удачного клика
                 }
-            }, 3000); // Даем время для полной загрузки элементов
+                attempts++;
+                if (attempts > 10) {
+                    console.error('Не удалось найти переключатель языка после 10 попыток');
+                    clearInterval(interval);
+                }
+            }, 1000); // Повторяем попытки каждую секунду до 10 раз (10 секунд)
         }
 
         window.onload = function() {
