@@ -45,45 +45,34 @@
         }
     </style>
     <script>
-        let countdownTime = 3; // Начинаем отсчет с 3 секунд
+        let countdownTime = 3; // Таймер отсчитывает с 3 секунд
 
         function updateTimer() {
             const timerElement = document.querySelector('.timer');
             if (countdownTime > 0) {
-                timerElement.textContent = countdownTime; // Обновляем отображение таймера
+                timerElement.textContent = countdownTime; // Обновление таймера на странице
                 countdownTime--;
             } else {
-                clearInterval(timerInterval); // Останавливаем таймер, когда он дойдет до 0
+                clearInterval(timerInterval); // Остановка таймера
             }
         }
 
-        function setGTranslateCookie() {
-            var targetLang = 'en'; // Целевой язык
-            var sourceLang = 'ru'; // Исходный язык (замени, если отличается)
-            var cookieValue = '/' + sourceLang + '/' + targetLang;
-
-            // Установка куки для основного домена и всех поддоменов
-            var domain = window.location.hostname;
-            document.cookie = "googtrans=" + cookieValue + "; path=/; domain=." + domain;
-            document.cookie = "googtrans=" + cookieValue + "; path=/";
-
-            console.log('Кука googtrans установлена в:', cookieValue);
-        }
-
         function redirectToEnglish() {
-            setGTranslateCookie();
-
-            // Перезагрузка страницы после установки куки для более надежного перенаправления
-            setTimeout(function() {
-                window.location.reload(); // Перезагрузка страницы
-            }, 1000); // Задержка 1 секунда
+            // Проверка наличия функции GTranslate
+            if (typeof doGTranslate === 'function') {
+                // Переключение на английский с использованием функции doGTranslate
+                doGTranslate('ru|en');
+                console.log('Перевод страницы через doGTranslate выполнен');
+            } else {
+                console.error('Функция doGTranslate не найдена');
+            }
         }
 
-        // Таймер обновляется каждую секунду
+        // Обновление таймера каждую секунду
         let timerInterval = setInterval(updateTimer, 1000);
 
         window.onload = function() {
-            setTimeout(redirectToEnglish, 3000); // Задержка 3 секунды перед редиректом
+            setTimeout(redirectToEnglish, 3000); // Перевод через 3 секунды
         };
     </script>
 </head>
