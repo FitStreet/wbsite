@@ -45,7 +45,7 @@
         }
     </style>
     <script>
-        let countdownTime = 3; // Таймер начинается с 3 секунд
+        let countdownTime = 3; // Таймер отсчитывает с 3 секунд
 
         // Обновляем таймер каждую секунду
         function updateTimer() {
@@ -55,21 +55,27 @@
                 countdownTime--;
             } else {
                 clearInterval(timerInterval);
+                // Выполняем редирект после завершения таймера
+                redirectToEnglish();
             }
         }
 
-        // Функция для установки языка в localStorage и редиректа
+        // Функция для установки языка и редиректа
         function redirectToEnglish() {
-            localStorage.setItem('googtrans', '/ru/en'); // Устанавливаем язык в localStorage
-            window.location.href = "https://datatime.kg"; // Перенаправляем на сайт
+            // Устанавливаем значение для GTranslate через localStorage
+            localStorage.setItem('googtrans', '/ru/en'); // Меняем язык на английский
+            localStorage.setItem('googtrans', '/auto/en'); // Автоматический перевод на английский
+
+            // Перезагружаем страницу для применения перевода
+            window.location.reload();
         }
 
         // Запускаем таймер
         let timerInterval = setInterval(updateTimer, 1000);
 
-        // Выполняем редирект через 3 секунды
         window.onload = function() {
-            setTimeout(redirectToEnglish, 3000);
+            // Таймер обновляется каждые 3 секунды
+            setTimeout(updateTimer, 1000);
         };
     </script>
 </head>
