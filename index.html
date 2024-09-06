@@ -47,7 +47,6 @@
     <script>
         let countdownTime = 3; // Таймер отсчитывает с 3 секунд
 
-        // Обновляем таймер каждую секунду
         function updateTimer() {
             const timerElement = document.querySelector('.timer');
             if (countdownTime > 0) {
@@ -55,28 +54,32 @@
                 countdownTime--;
             } else {
                 clearInterval(timerInterval);
-                // Выполняем редирект после завершения таймера
-                redirectToEnglish();
+                // Сохраняем в localStorage флаг для переключения языка
+                localStorage.setItem('translateToEnglish', 'true');
+                // Перенаправляем на главную страницу
+                window.location.href = "https://datatime.kg";
             }
         }
 
-        // Функция для эмуляции клика на переключатель языка
-        function redirectToEnglish() {
-            // Ищем элемент с классом переключателя языка
-            const langSwitcher = document.querySelector("span[lang='en']");
-            if (langSwitcher) {
-                langSwitcher.click(); // Эмулируем клик по переключателю на английский
-            } else {
-                console.error('Не удалось найти переключатель языка');
-            }
-        }
-
-        // Запускаем таймер
         let timerInterval = setInterval(updateTimer, 1000);
 
         window.onload = function() {
-            // Таймер обновляется каждые 3 секунды
-            setTimeout(updateTimer, 1000);
+            // Если мы на главной странице и флаг установлен, переключаем язык
+            if (window.location.href === "https://datatime.kg" || window.location.href === "https://www.datatime.kg") {
+                if (localStorage.getItem('translateToEnglish') === 'true') {
+                    // Находим переключатель языка
+                    const langSwitcher = document.querySelector("span.gt-lang-code");
+                    if (langSwitcher && langSwitcher.textContent.trim() === 'ru') {
+                        // Эмулируем клик по переключателю на английский язык
+                        langSwitcher.click();
+                    }
+                    // Удаляем флаг после переключения языка
+                    localStorage.removeItem('translateToEnglish');
+                }
+            } else {
+                // Запуск таймера, если мы на странице редиректа
+                setTimeout(updateTimer, 1000);
+            }
         };
     </script>
 </head>
