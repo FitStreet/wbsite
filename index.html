@@ -73,9 +73,9 @@
         function redirectToEnglish() {
             setGTranslateCookie();
 
-            // Задержка для обеспечения установки куки
+            // Перезагрузка страницы после установки куки для более надежного перенаправления
             setTimeout(function() {
-                window.location.href = "https://datatime.kg";
+                window.location.reload(); // Перезагрузка страницы
             }, 1000); // Задержка 1 секунда
         }
 
