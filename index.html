@@ -63,21 +63,31 @@
 
         let timerInterval = setInterval(updateTimer, 1000);
 
+        // Функция для переключения языка с задержкой
+        function switchLanguage() {
+            setTimeout(function() {
+                // Ищем переключатель языка с классом 'gt-lang-code'
+                const langSwitcher = document.querySelector("span.gt-lang-code");
+                if (langSwitcher && langSwitcher.textContent.trim() === 'ru') {
+                    // Эмулируем клик для переключения на английский язык
+                    langSwitcher.click();
+                } else {
+                    console.error('Не удалось найти переключатель языка или язык уже переключен');
+                }
+            }, 3000); // Даем время для полной загрузки элементов
+        }
+
         window.onload = function() {
             // Если мы на главной странице и флаг установлен, переключаем язык
             if (window.location.href === "https://datatime.kg" || window.location.href === "https://www.datatime.kg") {
                 if (localStorage.getItem('translateToEnglish') === 'true') {
-                    // Находим переключатель языка
-                    const langSwitcher = document.querySelector("span.gt-lang-code");
-                    if (langSwitcher && langSwitcher.textContent.trim() === 'ru') {
-                        // Эмулируем клик по переключателю на английский язык
-                        langSwitcher.click();
-                    }
+                    // Переключаем язык с задержкой
+                    switchLanguage();
                     // Удаляем флаг после переключения языка
                     localStorage.removeItem('translateToEnglish');
                 }
             } else {
-                // Запуск таймера, если мы на странице редиректа
+                // Запуск таймера для редиректа
                 setTimeout(updateTimer, 1000);
             }
         };
