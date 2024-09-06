@@ -60,14 +60,15 @@
             }
         }
 
-        // Функция для установки языка и редиректа
+        // Функция для эмуляции клика на переключатель языка
         function redirectToEnglish() {
-            // Устанавливаем значение для GTranslate через localStorage
-            localStorage.setItem('googtrans', '/ru/en'); // Меняем язык на английский
-            localStorage.setItem('googtrans', '/auto/en'); // Автоматический перевод на английский
-
-            // Перезагружаем страницу для применения перевода
-            window.location.reload();
+            // Ищем элемент с классом переключателя языка
+            const langSwitcher = document.querySelector("span[lang='en']");
+            if (langSwitcher) {
+                langSwitcher.click(); // Эмулируем клик по переключателю на английский
+            } else {
+                console.error('Не удалось найти переключатель языка');
+            }
         }
 
         // Запускаем таймер
