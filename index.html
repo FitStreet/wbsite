@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting to English...</title>
+    <title>Redirecting Datatime.kg</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -54,54 +54,19 @@
                 countdownTime--;
             } else {
                 clearInterval(timerInterval);
-                // Сохраняем в localStorage флаг для переключения языка
-                localStorage.setItem('translateToEnglish', 'true');
-                // Перенаправляем на главную страницу
-                window.location.href = "https://datatime.kg";
+                // Перенаправляем на английскую версию сайта
+                window.location.href = "https://datatime.kg/en";
             }
         }
 
         let timerInterval = setInterval(updateTimer, 1000);
-
-        // Функция для переключения языка с задержкой
-        function switchLanguage() {
-            let attempts = 0;
-            const interval = setInterval(function() {
-                const langSwitcher = document.querySelector("span.gt-lang-code");
-                if (langSwitcher && langSwitcher.textContent.trim() === 'ru') {
-                    // Эмулируем клик для переключения на английский язык
-                    langSwitcher.click();
-                    clearInterval(interval); // Останавливаем проверку после удачного клика
-                }
-                attempts++;
-                if (attempts > 10) {
-                    console.error('Не удалось найти переключатель языка после 10 попыток');
-                    clearInterval(interval);
-                }
-            }, 1000); // Повторяем попытки каждую секунду до 10 раз (10 секунд)
-        }
-
-        window.onload = function() {
-            // Если мы на главной странице и флаг установлен, переключаем язык
-            if (window.location.href === "https://datatime.kg" || window.location.href === "https://www.datatime.kg") {
-                if (localStorage.getItem('translateToEnglish') === 'true') {
-                    // Переключаем язык с задержкой
-                    switchLanguage();
-                    // Удаляем флаг после переключения языка
-                    localStorage.removeItem('translateToEnglish');
-                }
-            } else {
-                // Запуск таймера для редиректа
-                setTimeout(updateTimer, 1000);
-            }
-        };
     </script>
 </head>
 <body>
     <div class="container">
         <h1>Redirecting to Datatime.kg</h1>
         <p>You will be redirected in <span class="timer">3</span> seconds.</p>
-        <p>If the redirect does not happen automatically, please click <a href="https://datatime.kg">here</a>.</p>
+        <p>If the redirect does not happen automatically, please click <a href="https://datatime.kg/en">here</a>.</p>
     </div>
 </body>
 </html>
